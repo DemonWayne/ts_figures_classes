@@ -1,4 +1,4 @@
-const roundToTwoDecimals = (num: number): number => Math.floor(num * 100) / 100;
+const floorToTwoDecimals = (num: number): number => Math.floor(num * 100) / 100;
 
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
@@ -27,7 +27,9 @@ export class Triangle implements Figure {
       this.sideA + this.sideC <= this.sideB ||
       this.sideB + this.sideC <= this.sideA
     ) {
-      throw new Error('The provided sides do not form a valid triangle.');
+      throw new Error(
+        `The provided sides (${sideA}, ${sideB}, ${sideC}) do not form a valid triangle.`,
+      );
     }
   }
 
@@ -37,7 +39,7 @@ export class Triangle implements Figure {
       s * (s - this.sideA) * (s - this.sideB) * (s - this.sideC),
     );
 
-    return roundToTwoDecimals(area);
+    return floorToTwoDecimals(area);
   }
 }
 
@@ -56,7 +58,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return roundToTwoDecimals(area);
+    return floorToTwoDecimals(area);
   }
 }
 
@@ -76,7 +78,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return roundToTwoDecimals(area);
+    return floorToTwoDecimals(area);
   }
 }
 
